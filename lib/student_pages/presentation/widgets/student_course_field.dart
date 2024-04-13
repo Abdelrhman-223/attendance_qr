@@ -6,8 +6,8 @@
 **********Description: Display student's courses and scan button.
 */
 
-import 'package:attendance_qr/Core/Utiles/app_colors.dart';
-import 'package:attendance_qr/Core/Utiles/app_icons.dart';
+import 'package:attendance_qr/Core/Utils/app_colors.dart';
+import 'package:attendance_qr/Core/Utils/app_icons.dart';
 import 'package:attendance_qr/student_pages/presentation/widgets/qr_scanner/qr_function.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

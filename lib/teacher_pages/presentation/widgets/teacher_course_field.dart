@@ -7,14 +7,13 @@
 */
 
 import 'package:attendance_qr/Core/Styles/dividers.dart';
-import 'package:attendance_qr/Core/Utiles/app_colors.dart';
-import 'package:attendance_qr/Core/Utiles/app_icons.dart';
-import 'package:attendance_qr/student_pages/presentation/widgets/qr_scanner/qr_function.dart';
+import 'package:attendance_qr/Core/Utils/app_colors.dart';
+import 'package:attendance_qr/Core/Utils/app_icons.dart';
 import 'package:attendance_qr/teacher_pages/presentation/pages/course_attendance.dart';
 import 'package:attendance_qr/teacher_pages/presentation/widgets/qr_viewer.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 class TeacherCourseField extends StatelessWidget {
   const TeacherCourseField({super.key, required this.courseName, required this.courseCode});
@@ -25,8 +24,8 @@ class TeacherCourseField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.all(16),
-      margin: EdgeInsets.only(bottom: 32),
+      padding: const EdgeInsets.all(16),
+      margin: const EdgeInsets.only(bottom: 32),
       decoration: BoxDecoration(
         color: AppColors.blueColor,
         borderRadius: BorderRadius.circular(25),
@@ -59,23 +58,20 @@ class TeacherCourseField extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => CourseAttendance(
-                          courseName: courseName,
-                          courseCode: courseCode,
-                        ),
-                      ));
+                  Get.to(
+                    CourseAttendance(
+                      courseName: courseName,
+                      courseCode: courseCode,
+                    ),
+                  );
                 },
                 child: SvgPicture.asset(AppIcons.group),
               ),
               spaceHiresontal16(),
               GestureDetector(
                 onTap: () {
-                  showDialog(
-                    context: context,
-                    builder: (context) => QrViewer(
+                  Get.dialog(
+                    QrViewer(
                       courseName: courseName,
                     ),
                   );

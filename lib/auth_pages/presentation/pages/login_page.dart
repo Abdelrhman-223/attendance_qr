@@ -5,23 +5,26 @@
 **********Author: Abdelrhman Hussein
 **********Description: This page will contain the login form.
 */
+import 'package:attendance_qr/auth_pages/data/data_sources/get_data.dart';
 import 'package:flutter/material.dart';
 import 'package:attendance_qr/Core/Styles/dividers.dart';
-import 'package:attendance_qr/Core/Utiles/app_colors.dart';
+import 'package:attendance_qr/Core/Utils/app_colors.dart';
 import 'package:attendance_qr/auth_pages/presentation/widgets/login_tap_button.dart';
 import 'package:attendance_qr/auth_pages/presentation/widgets/text_field.dart';
+import 'package:get/get.dart';
 
+import '../manager/login_text_fields_controller.dart';
 import '../widgets/login_button.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({super.key});
+  const LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController userNameController = TextEditingController();
+  TextEditingController userEmailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   int tabIndex = 0;
 
@@ -35,9 +38,11 @@ class _LoginPageState extends State<LoginPage> {
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(16),
+            /// column to create the login page body.
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                // page title
                 Text(
                   "Login as",
                   style: TextStyle(
@@ -74,24 +79,57 @@ class _LoginPageState extends State<LoginPage> {
                   ],
                 ),
                 spaceVertical32(),
-                FormTextField(
-                  fieldController: userNameController,
-                  fieldTitle: "User Name",
-                  fieldColor: (tabIndex == 0) ? AppColors.orangeColor : AppColors.blueColor,
-                  isPasswordField: false,
-                ),
-                spaceVertical16(),
-                FormTextField(
-                  fieldController: passwordController,
-                  fieldTitle: "Password",
-                  fieldColor: (tabIndex == 0) ? AppColors.orangeColor : AppColors.blueColor,
-                  isPasswordField: true,
-                ),
+                GetBuilder(
+                    init: GetDataForLogin(),
+                    builder: (messageController) {
+                      return Column(
+                        children: [
+                          FormTextField(
+                            fieldController: userEmailController,
+                            fieldTitle: "User Name",
+                            fieldColor:
+                                (tabIndex == 0) ? AppColors.orangeColor : AppColors.blueColor,
+                            isPasswordField: false,
+                          ),
+                          (messageController.messageFrom == "email" &&
+                                  messageController.loginMessage != "")
+                              ? Text(
+                                  messageController.loginMessage,
+                                  style: TextStyle(
+                                    color: AppColors.redColor,
+                                  ),
+                                )
+                              : const Text(""),
+                          spaceVertical16(),
+                          FormTextField(
+                            fieldController: passwordController,
+                            fieldTitle: "Password",
+                            fieldColor:
+                                (tabIndex == 0) ? AppColors.orangeColor : AppColors.blueColor,
+                            isPasswordField: true,
+                          ),
+                          (messageController.messageFrom == "password" &&
+                                  messageController.loginMessage != "")
+                              ? Text(
+                                  messageController.loginMessage,
+                                  style: TextStyle(
+                                    color: AppColors.redColor,
+                                  ),
+                                )
+                              : const Text(""),
+                        ],
+                      );
+                    }),
                 spaceVertical32(),
-                LoginButton(
-                  buttonTitle: "Login",
-                  buttonColor: AppColors.blackColor,
-                  userType: (tabIndex == 0) ? "student": "teacher",
+                GetBuilder<LoginTextFieldsController>(
+                  init: LoginTextFieldsController(),
+                  builder: (controller) => LoginButton(
+                    buttonTitle: "Login",
+                    buttonColor: AppColors.blackColor,
+                    userType: (tabIndex == 0) ? "student" : "teacher",
+                    userEmail: controller.userEmail,
+                    userPassword: controller.userPassword,
+                  ),
                 ),
               ],
             ),

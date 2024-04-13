@@ -9,9 +9,10 @@
 import 'package:attendance_qr/Core/Styles/dividers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
-import '../../../Core/Utiles/app_colors.dart';
-import '../../../Core/Utiles/app_icons.dart';
+import '../../../Core/Utils/app_colors.dart';
+import '../../../Core/Utils/app_icons.dart';
 import '../widgets/attend_student_field.dart';
 
 class CourseAttendance extends StatefulWidget {
@@ -57,7 +58,7 @@ class _CourseAttendanceState extends State<CourseAttendance> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.pop(context);
+                      Get.back();
                     },
                     child: SvgPicture.asset(AppIcons.goBack),
                   ),

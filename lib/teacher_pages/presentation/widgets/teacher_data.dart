@@ -9,14 +9,16 @@
 import 'package:attendance_qr/auth_pages/presentation/pages/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import '../../../Core/Styles/dividers.dart';
-import '../../../Core/Utiles/app_colors.dart';
-import '../../../Core/Utiles/app_icons.dart';
+import '../../../Core/Utils/app_colors.dart';
+import '../../../Core/Utils/app_icons.dart';
+import '../../../main.dart';
 
 class TeacherData extends StatelessWidget {
-  const TeacherData({super.key, required this.teacherName});
+  TeacherData({super.key,});
 
-  final String teacherName;
+  final String? teacherName = sharedPreferences?.getString("userName")!;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +38,7 @@ class TeacherData extends StatelessWidget {
               ),
               spaceHiresontal8(),
               Text(
-                teacherName,
+                teacherName!,
                 style: TextStyle(
                   color: AppColors.blueColor,
                   fontSize: 22,
@@ -47,11 +49,7 @@ class TeacherData extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => LoginPage(),
-                  ));
+              Get.off(const LoginPage());
             },
             child: CircleAvatar(
               radius: 20,

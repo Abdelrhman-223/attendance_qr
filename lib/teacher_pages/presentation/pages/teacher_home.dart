@@ -24,8 +24,8 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
       body: SafeArea(
         child: Column(
           children: [
-            const TeacherData(teacherName: "Teacher Name"),
-            Container(
+            TeacherData(),
+            SizedBox(
               height: MediaQuery.of(context).size.height - 120,
               child: ListView.builder(
                 itemCount: 10,

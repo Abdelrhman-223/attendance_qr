@@ -6,17 +6,14 @@
 **********Description: Display student's courses and scan button.
 */
 
-import 'package:attendance_qr/Core/Styles/dividers.dart';
-import 'package:attendance_qr/Core/Utiles/app_colors.dart';
-import 'package:attendance_qr/Core/Utiles/app_icons.dart';
-import 'package:attendance_qr/student_pages/presentation/widgets/qr_scanner/qr_function.dart';
+import 'package:attendance_qr/Core/Utils/app_colors.dart';
+import 'package:attendance_qr/Core/Utils/app_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class AttendStudentField extends StatelessWidget {
-  const AttendStudentField(
-      {super.key, required this.studentName, required this.studentId});
+  const AttendStudentField({super.key, required this.studentName, required this.studentId});
 
   final String studentName, studentId;
 
@@ -24,8 +21,8 @@ class AttendStudentField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.all(16),
-      margin: EdgeInsets.only(bottom: 16),
+      padding: const EdgeInsets.all(16),
+      margin: const EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
         color: AppColors.blueColor,
         borderRadius: BorderRadius.circular(25),
@@ -54,12 +51,7 @@ class AttendStudentField extends StatelessWidget {
               ),
             ],
           ),
-          GestureDetector(
-            onTap: () {
-              qrScanner(context);
-            },
-            child: SvgPicture.asset(AppIcons.check),
-          ),
+          SvgPicture.asset(AppIcons.check),
         ],
       ),
     );

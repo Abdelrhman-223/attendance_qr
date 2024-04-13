@@ -7,7 +7,7 @@
 */
 
 import 'package:flutter/material.dart';
-import 'package:attendance_qr/Core/Utiles/app_colors.dart';
+import 'package:attendance_qr/Core/Utils/app_colors.dart';
 
 class LoginTapButton extends StatelessWidget {
   const LoginTapButton({super.key, required this.buttonTitle, required this.buttonColor, required this.activeButton});

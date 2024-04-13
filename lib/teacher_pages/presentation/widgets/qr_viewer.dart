@@ -6,7 +6,7 @@
 **********Description: Alert to view qr code.
 */
 
-import 'package:attendance_qr/Core/Utiles/app_colors.dart';
+import 'package:attendance_qr/Core/Utils/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class QrViewer extends StatelessWidget {

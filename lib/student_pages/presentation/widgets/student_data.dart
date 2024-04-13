@@ -7,18 +7,23 @@
 */
 
 import 'package:attendance_qr/auth_pages/presentation/pages/login_page.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
+import 'package:get/get.dart';
 import '../../../Core/Styles/dividers.dart';
-import '../../../Core/Utiles/app_colors.dart';
-import '../../../Core/Utiles/app_icons.dart';
+import '../../../Core/Utils/app_colors.dart';
+import '../../../Core/Utils/app_icons.dart';
+import '../../../main.dart';
 
-class StudentData extends StatelessWidget {
-  const StudentData({super.key, required this.studentName, required this.studentId});
+class StudentData extends StatefulWidget {
+  const StudentData({super.key,});
 
-  final String studentName, studentId;
+  @override
+  State<StudentData> createState() => _StudentDataState();
+}
+
+class _StudentDataState extends State<StudentData> {
+  String? studentId = sharedPreferences?.getString("userId")!, studentName = sharedPreferences?.getString("userName")!;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +46,7 @@ class StudentData extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    studentName,
+                    studentName!,
                     style: TextStyle(
                       color: AppColors.orangeColor,
                       fontSize: 22,
@@ -49,7 +54,7 @@ class StudentData extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    studentId,
+                    studentId!,
                     style: TextStyle(
                       color: AppColors.blackColor,
                       fontSize: 18,
@@ -61,11 +66,7 @@ class StudentData extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => LoginPage(),
-                  ));
+              Get.off(const LoginPage());
             },
             child: CircleAvatar(
               radius: 20,
